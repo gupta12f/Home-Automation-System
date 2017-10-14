@@ -1,0 +1,72 @@
+int val = 0;
+
+
+int Geyser = 8;
+int AC = 9;
+int Fan = 11;
+int Light1 = 12;
+int Light2 = 13;
+
+void setup()
+{
+  Serial.begin(9600);
+  
+  
+  pinMode(Geyser, OUTPUT);
+  pinMode(AC, OUTPUT);
+  pinMode(Fan, OUTPUT);
+  pinMode(Light1, OUTPUT);
+  pinMode(Light2, OUTPUT);
+}
+void loop()
+{
+  delay(100);
+}
+void serialEvent() // To check if there is any data on the Serial line
+{
+  while (Serial.available())
+  {
+    val = Serial.parseInt();
+    if(val == 100)   //Switch on the LED, if the received value is 1.
+    {
+      
+      digitalWrite(Geyser, HIGH);
+      
+    }
+    else if(val == 101){
+      digitalWrite(AC, HIGH);
+    }
+    else if(val == 103){
+      digitalWrite(Geyser, LOW);
+    }
+    else if(val == 104){
+      digitalWrite(AC, LOW);
+      
+    }
+    else if(val == 102){
+      digitalWrite(Fan, HIGH);
+    }
+    else if(val == 105){
+      digitalWrite(Fan, LOW);
+    }
+    else if(val == 107){
+      digitalWrite(Light1, HIGH);
+    }
+    else if(val == 108){
+      digitalWrite(Light2, HIGH);
+    }
+    else if(val == 106){
+      digitalWrite(Geyser, LOW);
+      digitalWrite(AC, LOW);
+      digitalWrite(Fan, LOW);
+      digitalWrite(Light1, LOW);
+      digitalWrite(Light2, LOW);
+      
+    }
+    /*else if(val == 0){
+      Serial.write(digitalRead(bedroom));
+    }*/
+    
+  }
+Serial.println("Succesfully received.");
+}
